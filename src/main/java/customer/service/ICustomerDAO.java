@@ -11,4 +11,5 @@ public interface ICustomerDAO {
     public List<Customer> findAll();
     public void delete(int id)throws SQLException;
     public boolean update(Customer customer)throws SQLException;
+    public List<Customer> findByName(String name);
 }

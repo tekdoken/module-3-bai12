@@ -88,9 +88,8 @@ public class CustomerDAO implements ICustomerDAO {
         List<Customer> customers = new ArrayList<>();
         try (Connection connection = getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("select * from customer WHERE CustomerName LIKE ?;");
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from customer WHERE name LIKE ?;");
         ) {  preparedStatement.setString(1, "%" + name + "%");
-
 
             ResultSet rs = preparedStatement.executeQuery();
 

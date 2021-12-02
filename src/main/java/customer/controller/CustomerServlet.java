@@ -60,6 +60,9 @@ public class CustomerServlet extends HttpServlet {
             case "find":
                 findCustomer(request, response);
                 break;
+                case "findName":
+                findNameCustomer(request, response);
+                break;
             case "delete":
                 try {
                     deleteCustomer(request, response);
@@ -76,6 +79,15 @@ public class CustomerServlet extends HttpServlet {
                 break;
 
         }
+    }
+
+    private void findNameCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/find.jsp");
+        String name = request.getParameter("name");
+        List<Customer> listCustomers = new ArrayList<>();
+        listCustomers=customerDAO.findByName(name);
+        request.setAttribute("listCustomer", listCustomers);
+        requestDispatcher.forward(request, response);
     }
 
     private void editCustomer(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
