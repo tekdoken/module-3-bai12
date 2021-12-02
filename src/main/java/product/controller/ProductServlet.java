@@ -29,7 +29,6 @@ public class ProductServlet extends HttpServlet {
                 showEditForm(request, response);
                 break;
             case "delete":
-
                 try {
                     deleteProduct(request, response);
                 } catch (SQLException e) {
@@ -37,12 +36,19 @@ public class ProductServlet extends HttpServlet {
                 }
 
 //                break;
-//            case "sort-by-quantity":
-//                showSortByQuantity(request,response);
-//                break;
+            case "sort":
+                sort(request,response);
+                break;
             default:
                 showList(request, response);
         }
+    }
+
+    private void sort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
+        List<Product> products = productDAO.sortByQuantity();
+        request.setAttribute("listProduct", products);
+        requestDispatcher.forward(request, response);
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {

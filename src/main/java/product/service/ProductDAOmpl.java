@@ -67,7 +67,22 @@ public class ProductDAOmpl implements IProductDAO {
 
     @Override
     public List<Product> sortByQuantity() {
-        return null;
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select *from product order by quantity desc ");) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                int quantity = rs.getInt("quantity");
+                products.add(new Product(id, name, price,quantity));
+            }
+        } catch (SQLException e) {
+        }
+        return products;
     }
 
     @Override
