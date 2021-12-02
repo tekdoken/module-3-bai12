@@ -20,6 +20,11 @@ public class Product {
         return id;
     }
 
+    public Product(String name, int price, int quantity) {
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+    }
 
     public String getName() {
         return name;

@@ -25,7 +25,7 @@
 
 <h2><a href="/products?act=create">create</a></h2>
 <c:forEach var="pro" items="${listProduct}">
-  <h2>${pro.id},${pro.name},${pro.price},${pro.quantity}</h2><a href="/customers?act=edit&id=${pro.id}">edit</a> </h2>,<a href="/customers?act=delete&id=${pro.id}">delete</a>
+  <h2>${pro.id},${pro.name},${pro.price},${pro.quantity}</h2><a href="/products?act=edit&id=${pro.id}">edit</a> </h2>,<a href="/products?act=delete&id=${pro.id}">delete</a>
 </c:forEach>
 </body>
 </html>

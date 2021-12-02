@@ -72,6 +72,26 @@ public class ProductDAOmpl implements IProductDAO {
 
     @Override
     public Product findById(int id) {
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product");) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int idData = rs.getInt("id");
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                int quantity = rs.getInt("quantity");
+                products.add(new Product(idData, name, price,quantity));
+            }
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getId() == id) {
+                    return products.get(i);
+                }
+            }
+        } catch (SQLException e) {
+        }
         return null;
     }
 
@@ -82,6 +102,14 @@ public class ProductDAOmpl implements IProductDAO {
 
     @Override
     public boolean update(Product product) throws SQLException {
-        return false;
+        boolean rowUpdated;
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("update product set name = ?,price= ? ,quantity= ? where id = ?;");) {
+            statement.setString(1, product.getName());
+            statement.setInt(2, product.getPrice());
+            statement.setInt(3, product.getQuantity());
+            statement.setInt(4, product.getId());
+            rowUpdated = statement.executeUpdate() > 0;
+        }
+        return rowUpdated;
     }
 }
