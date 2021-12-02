@@ -14,7 +14,7 @@
 <body>
 <h1><a href="/customers">list Customer</a></h1>
 <c:forEach var="cus" items="${listCustomer}">
-    <h2>${cus.id},${cus.name},${cus.age}</h2>
+    <h2><input type="text" name="name"  value="${editCustomer.name}">,${cus.name},${cus.age}</h2>
 </c:forEach>
 </body>
 </html>
