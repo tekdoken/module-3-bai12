@@ -84,6 +84,28 @@ public class CustomerDAO implements ICustomerDAO {
         return null;
     }
 
+    public List<Customer> findByName(String name) {
+        List<Customer> customers = new ArrayList<>();
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from customer WHERE CustomerName LIKE ?;");
+        ) {  preparedStatement.setString(1, "%" + name + "%");
+
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int idData = rs.getInt("id");
+                String name1 = rs.getString("name");
+                int age = rs.getInt("age");
+                customers.add(new Customer(idData, name1, age));
+            }
+            return customers;
+        } catch (SQLException e) {
+        }
+        return null;
+    }
+
 
     @Override
     public List<Customer> findAll() {
