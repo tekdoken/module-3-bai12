@@ -12,15 +12,11 @@
   <title>Title</title>
 </head>
 <body><h1>list Product</h1>
-<%--<form action="/products?act=find" method="post">--%>
-<%--  <input type="number" name="id" placeholder="enter id"><button>find</button>--%>
-<%--</form>--%>
+
 <form action="/products?act=findName" method="post">
   <input type="text" name="name" placeholder="enter name"><button>find</button>
 </form>
-<%--<form action="/customers?act=delete" method="post">--%>
-<%--  <input type="number" name="id" placeholder="enter id"><button>delete</button>--%>
-<%--</form>--%>
+
 <h1><a href="/products?act=sort">order</a></h1>
 
 <h2><a href="/products?act=create">create</a></h2>
