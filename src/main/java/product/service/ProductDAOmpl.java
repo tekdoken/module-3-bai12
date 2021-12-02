@@ -1,8 +1,10 @@
 package product.service;
 
+import customer.model.Customer;
 import product.model.Product;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductDAOmpl implements IProductDAO {
@@ -40,12 +42,27 @@ public class ProductDAOmpl implements IProductDAO {
 
     @Override
     public List<Product> findByName(String name) {
-        return null;
+      return null;
     }
 
     @Override
     public List<Product> findAll() {
-        return null;
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select *from product");) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int price = rs.getInt("price");
+                int quantity = rs.getInt("quantity");
+                products.add(new Product(id, name, price,quantity ));
+            }
+        } catch (SQLException e) {
+        }
+        return products;
     }
 
     @Override

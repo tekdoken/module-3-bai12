@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/products")
 public class ProductServlet extends HttpServlet {
@@ -24,22 +25,29 @@ public class ProductServlet extends HttpServlet {
             case "create":
                 showCreateForm(request, response);
                 break;
-            case "edit":
-                showEditCustomer(request, response);
-                break;
-            case "delete":
-                try {
-                    deleteCustomer(request, response);
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                break;
-            case "sort-by-quantity":
-                showSortByQuantity(request,response);
-                break;
+//            case "edit":
+//                showEditCustomer(request, response);
+//                break;
+//            case "delete":
+//                try {
+//                    deleteCustomer(request, response);
+//                } catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//                break;
+//            case "sort-by-quantity":
+//                showSortByQuantity(request,response);
+//                break;
             default:
                 showList(request, response);
         }
+    }
+
+    private void showList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
+        List<Product> products = productDAO.findAll();
+        request.setAttribute("listProduct", products);
+        requestDispatcher.forward(request, response);
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -84,6 +92,6 @@ public class ProductServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         productDAO.add(new Product(id,name, price,quantity));
-        response.sendRedirect("/customers");
+        response.sendRedirect("/products");
     }
 }

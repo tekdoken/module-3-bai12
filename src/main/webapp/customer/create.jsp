@@ -14,7 +14,6 @@
 <form action="/customers?act=create" method="post">
     <input type="number" name="id">  <input type="text" name="name">
     <input type="number" name="age">
-
     <button>create</button>
 </form>
 </body>

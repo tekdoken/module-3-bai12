@@ -8,9 +8,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Product</title>
 </head>
 <body>
-
+<form action="/products?act=create" method="post">
+    <input type="number" name="id">
+    <input type="text" name="name">
+    <input type="number" name="price">
+    <input type="number" name="quantity">
+    <button>create</button>
+</form>
 </body>
 </html>
