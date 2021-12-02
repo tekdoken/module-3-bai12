@@ -13,9 +13,10 @@
 </head>
 <body><h1>list Product</h1>
 
-<form action="/products?act=findName" method="post">
+<form>
   <input type="text" name="name" placeholder="enter name"><button>find</button>
 </form>
+
 
 <h1><a href="/products?act=sort">order</a></h1>
 

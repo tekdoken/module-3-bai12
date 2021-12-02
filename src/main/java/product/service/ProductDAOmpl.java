@@ -5,8 +5,7 @@ import product.model.Product;
 
 import javax.servlet.RequestDispatcher;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class ProductDAOmpl implements IProductDAO {
 
@@ -103,6 +102,10 @@ public class ProductDAOmpl implements IProductDAO {
         }
         return products;
     }
+    public void sortBy(ArrayList<Product> products) {
+         Arrays.sort(new ArrayList[]{products});
+    }
+
 
     @Override
     public Product findById(int id) {
@@ -149,4 +152,6 @@ public class ProductDAOmpl implements IProductDAO {
         }
         return rowUpdated;
     }
+
+
 }

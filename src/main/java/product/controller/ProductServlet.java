@@ -15,7 +15,8 @@ import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/products")
 public class ProductServlet extends HttpServlet {
-    IProductDAO productDAO=new ProductDAOmpl();
+    IProductDAO productDAO = new ProductDAOmpl();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("act");
@@ -37,11 +38,11 @@ public class ProductServlet extends HttpServlet {
                 }
                 break;
             case "sort":
-                sort(request,response);
+                sort(request, response);
                 break;
-//            case "findName":
-//                findName(request,response);
-//                break;
+            case "findName":
+                findName(request, response);
+                break;
             default:
                 showList(request, response);
         }
@@ -51,16 +52,25 @@ public class ProductServlet extends HttpServlet {
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
         String name = request.getParameter("name");
         List<Product> listProduct = new ArrayList<>();
-        listProduct=productDAO.findByName(name);
+        listProduct = productDAO.findByName(name);
         request.setAttribute("listProduct", listProduct);
         requestDispatcher.forward(request, response);
     }
 
     private void sort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
-        List<Product> products = productDAO.sortByQuantity();
-        request.setAttribute("listProduct", products);
-        requestDispatcher.forward(request, response);
+        String name = request.getParameter("name");
+        if (name == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
+            List<Product> products = productDAO.sortByQuantity();
+            request.setAttribute("listProduct", products);
+            requestDispatcher.forward(request, response);
+        }else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
+            List<Product> listProduct = new ArrayList<>();
+            listProduct = productDAO.findByName(name);
+            request.setAttribute("listProduct", listProduct);
+            requestDispatcher.forward(request, response);
+        }
     }
 
     private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
@@ -81,10 +91,19 @@ public class ProductServlet extends HttpServlet {
     }
 
     private void showList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
-        List<Product> products = productDAO.findAll();
-        request.setAttribute("listProduct", products);
-        requestDispatcher.forward(request, response);
+        String name = request.getParameter("name");
+        if (name == null) {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
+            List<Product> products = productDAO.findAll();
+            request.setAttribute("listProduct", products);
+            requestDispatcher.forward(request, response);
+        }else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
+            List<Product> listProduct = new ArrayList<>();
+            listProduct = productDAO.findByName(name);
+            request.setAttribute("listProduct", listProduct);
+            requestDispatcher.forward(request, response);
+        }
     }
 
     private void showCreateForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -114,7 +133,7 @@ public class ProductServlet extends HttpServlet {
                 }
                 break;
             case "findName":
-                findName(request,response);
+                findName(request, response);
                 break;
             default:
         }
@@ -125,7 +144,7 @@ public class ProductServlet extends HttpServlet {
         int price = Integer.parseInt(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
         String name = request.getParameter("name");
-        productDAO.update(new Product(id,name,price,quantity));
+        productDAO.update(new Product(id, name, price, quantity));
         response.sendRedirect("/products");
     }
 
@@ -134,7 +153,7 @@ public class ProductServlet extends HttpServlet {
         String name = request.getParameter("name");
         int price = Integer.parseInt(request.getParameter("price"));
         int quantity = Integer.parseInt(request.getParameter("quantity"));
-        productDAO.add(new Product(id,name, price,quantity));
+        productDAO.add(new Product(id, name, price, quantity));
         response.sendRedirect("/products");
     }
 }
