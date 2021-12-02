@@ -97,7 +97,10 @@ public class ProductDAOmpl implements IProductDAO {
 
     @Override
     public void delete(int id) throws SQLException {
-
+        try (Connection connection = getConnection(); PreparedStatement statement = connection.prepareStatement("delete from product where id = ?;");) {
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        }
     }
 
     @Override

@@ -28,12 +28,14 @@ public class ProductServlet extends HttpServlet {
             case "edit":
                 showEditForm(request, response);
                 break;
-//            case "delete":
-//                try {
-//                    deleteCustomer(request, response);
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
+            case "delete":
+
+                try {
+                    deleteProduct(request, response);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+
 //                break;
 //            case "sort-by-quantity":
 //                showSortByQuantity(request,response);
@@ -41,6 +43,15 @@ public class ProductServlet extends HttpServlet {
             default:
                 showList(request, response);
         }
+    }
+
+    private void deleteProduct(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        productDAO.delete(id);
+        List<Product> products = productDAO.findAll();
+        request.setAttribute("listProduct", products);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("product/list.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
