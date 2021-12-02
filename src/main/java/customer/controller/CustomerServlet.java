@@ -37,9 +37,19 @@ public class CustomerServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
+            case "order":
+                order(request,response);
+                break;
             default:
                 showList(request, response);
         }
+    }
+
+    private void order(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/list.jsp");
+        List<Customer> customers = customerDAO.findAllOrder();
+        request.setAttribute("listCustomer", customers);
+        requestDispatcher.forward(request, response);
     }
 
 

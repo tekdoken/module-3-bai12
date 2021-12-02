@@ -111,7 +111,25 @@ public class CustomerDAO implements ICustomerDAO {
         List<Customer> customers = new ArrayList<>();
         try (Connection connection = getConnection();
 
-             PreparedStatement preparedStatement = connection.prepareStatement("select *from customer order by name");) {
+             PreparedStatement preparedStatement = connection.prepareStatement("select *from customer");) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                customers.add(new Customer(id, name, age));
+            }
+        } catch (SQLException e) {
+        }
+        return customers;
+    }
+    @Override
+    public List<Customer> findAllOrder() {
+        List<Customer> customers = new ArrayList<>();
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select *from customer order by name desc ");) {
             ResultSet rs = preparedStatement.executeQuery();
 
             while (rs.next()) {

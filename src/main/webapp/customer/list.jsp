@@ -22,6 +22,8 @@
 <form action="/customers?act=delete" method="post">
     <input type="number" name="id" placeholder="enter id"><button>delete</button>
 </form>
+<h1><a href="/customers?act=order">order</a></h1>
+
 <h2><a href="/customers?act=create">create</a></h2>
 <c:forEach var="cus" items="${listCustomer}">
     <h2>${cus.id},${cus.name},${cus.age},</h2><a href="/customers?act=edit&id=${cus.id}">edit</a> </h2>,<a href="/customers?act=delete&id=${cus.id}">delete</a>

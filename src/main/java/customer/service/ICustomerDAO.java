@@ -9,6 +9,7 @@ public interface ICustomerDAO {
     public void add(Customer customer)throws SQLException;
     public Customer findById(int id);
     public List<Customer> findAll();
+    public List<Customer> findAllOrder();
     public void delete(int id)throws SQLException;
     public boolean update(Customer customer)throws SQLException;
     public List<Customer> findByName(String name);
