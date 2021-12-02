@@ -92,7 +92,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void findNameCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/find.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/list.jsp");
         String name = request.getParameter("name");
         List<Customer> listCustomers = new ArrayList<>();
         listCustomers=customerDAO.findByName(name);
@@ -126,7 +126,7 @@ public class CustomerServlet extends HttpServlet {
     }
 
     private void findCustomer(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/find.jsp");
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("customer/list.jsp");
         int id = Integer.parseInt(request.getParameter("id"));
         Customer customers = customerDAO.findById(id);
         List<Customer> listCustomers = new ArrayList<>();

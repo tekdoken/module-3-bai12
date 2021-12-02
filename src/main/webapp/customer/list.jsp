@@ -11,8 +11,7 @@
 <head>
     <title>Title</title>
 </head>
-<body>
-<h1>list Customer</h1>
+<body>h1>list Customer</h1>
 <form action="/customers?act=find" method="post">
     <input type="number" name="id" placeholder="enter id"><button>find</button>
 </form>
