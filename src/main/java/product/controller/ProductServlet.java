@@ -10,6 +10,7 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ProductServlet", value = "/products")
@@ -34,14 +35,25 @@ public class ProductServlet extends HttpServlet {
                 } catch (SQLException e) {
                     e.printStackTrace();
                 }
-
-//                break;
+                break;
             case "sort":
                 sort(request,response);
                 break;
+//            case "findName":
+//                findName(request,response);
+//                break;
             default:
                 showList(request, response);
         }
+    }
+
+    private void findName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("product/list.jsp");
+        String name = request.getParameter("name");
+        List<Product> listProduct = new ArrayList<>();
+        listProduct=productDAO.findByName(name);
+        request.setAttribute("listProduct", listProduct);
+        requestDispatcher.forward(request, response);
     }
 
     private void sort(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -101,16 +113,9 @@ public class ProductServlet extends HttpServlet {
                     e.printStackTrace();
                 }
                 break;
-//            case "delete":
-//                try {
-//                    deleteCustomer(request, response);
-//                } catch (SQLException e) {
-//                    e.printStackTrace();
-//                }
-//                break;
-//            case "sort-by-quantity":
-//                showSortByQuantity(request,response);
-//                break;
+            case "findName":
+                findName(request,response);
+                break;
             default:
         }
     }

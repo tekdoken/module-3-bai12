@@ -3,6 +3,7 @@ package product.service;
 import customer.model.Customer;
 import product.model.Product;
 
+import javax.servlet.RequestDispatcher;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,25 @@ public class ProductDAOmpl implements IProductDAO {
 
     @Override
     public List<Product> findByName(String name) {
-      return null;
+        List<Product> products = new ArrayList<>();
+        try (Connection connection = getConnection();
+
+             PreparedStatement preparedStatement = connection.prepareStatement("select * from product WHERE name LIKE ?;");
+        ) {  preparedStatement.setString(1, "%" + name + "%");
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String nameProduct = rs.getString("name");
+                int price = rs.getInt("price");
+                int quantity = rs.getInt("quantity");
+                products.add(new Product(id, nameProduct, price,quantity));
+            }
+            return products;
+        } catch (SQLException e) {
+        }
+        return null;
     }
 
     @Override

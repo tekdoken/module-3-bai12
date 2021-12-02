@@ -15,9 +15,9 @@
 <%--<form action="/products?act=find" method="post">--%>
 <%--  <input type="number" name="id" placeholder="enter id"><button>find</button>--%>
 <%--</form>--%>
-<%--<form action="/customers?act=findName" method="post">--%>
-<%--  <input type="text" name="name" placeholder="enter name"><button>find</button>--%>
-<%--</form>--%>
+<form action="/products?act=findName" method="post">
+  <input type="text" name="name" placeholder="enter name"><button>find</button>
+</form>
 <%--<form action="/customers?act=delete" method="post">--%>
 <%--  <input type="number" name="id" placeholder="enter id"><button>delete</button>--%>
 <%--</form>--%>
