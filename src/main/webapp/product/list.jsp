@@ -22,7 +22,17 @@
 
 <h2><a href="/products?act=create">create</a></h2>
 <c:forEach var="pro" items="${listProduct}">
-  <h2>${pro.id},${pro.name},${pro.price},${pro.quantity}</h2>, <a href="/products?act=edit&id=${pro.id}">edit</a> , <a href="/products?act=delete&id=${pro.id}">delete</a>
+
+<form action="/products?act=edit&id=${pro.id}" method="post">
+  name: <input style="border: none" type="text" name="name"  value="${pro.name}">
+  price: <input style="border: none" type="number" name="price" value="${pro.price}">
+  quantity: <input style="border: none" type="number" name="quantity" value="${pro.quantity}">
+  <button>edit</button>
+
+  <a href="/products?act=delete&id=${pro.id}">delete</a>
+
+
+</form>
 </c:forEach>
 </body>
 </html>
