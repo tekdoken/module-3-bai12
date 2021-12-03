@@ -28,7 +28,7 @@
   price: <input style="border: none" type="number" name="price" value="${pro.price}">
   quantity: <input style="border: none" type="number" name="quantity" value="${pro.quantity}">
   <button onclick="if (confirm('Edit selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};" title="Link Title">edit</button>
-  <a href="/products?act=delete&id=${pro.id}" onclick="if (confirm('Delete selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};" title="Link Title">
+  <a href="/products?act=delete&id=${pro.id}" onclick="return confirm('Delete selected item?')" >
   delete
 </a>
 </form>
