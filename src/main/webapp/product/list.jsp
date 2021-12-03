@@ -27,11 +27,10 @@
   name: <input style="border: none" type="text" name="name"  value="${pro.name}">
   price: <input style="border: none" type="number" name="price" value="${pro.price}">
   quantity: <input style="border: none" type="number" name="quantity" value="${pro.quantity}">
-  <button>edit</button>
-
-  <a href="/products?act=delete&id=${pro.id}">delete</a>
-
-
+  <button onclick="if (confirm('Edit selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};" title="Link Title">edit</button>
+  <a href="/products?act=delete&id=${pro.id}" onclick="if (confirm('Delete selected item?')){return true;}else{event.stopPropagation(); event.preventDefault();};" title="Link Title">
+  delete
+</a>
 </form>
 </c:forEach>
 </body>
