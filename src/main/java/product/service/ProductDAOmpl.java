@@ -102,10 +102,6 @@ public class ProductDAOmpl implements IProductDAO {
         }
         return products;
     }
-    public void sortBy(ArrayList<Product> products) {
-         Arrays.sort(new ArrayList[]{products});
-    }
-
 
     @Override
     public Product findById(int id) {

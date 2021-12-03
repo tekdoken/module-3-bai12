@@ -18,7 +18,7 @@
 </form>
 
 
-<h1><a href="/products?act=sort">order</a></h1>
+<h1><a href="/products?act=sort">sort</a></h1>
 
 <h2><a href="/products?act=create">create</a></h2>
 <c:forEach var="pro" items="${listProduct}">
