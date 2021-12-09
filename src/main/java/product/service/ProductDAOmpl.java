@@ -34,8 +34,6 @@ public class ProductDAOmpl implements IProductDAO {
             preparedStatement.setInt(3, product.getPrice());
             preparedStatement.setInt(4, product.getQuantity());
             preparedStatement.executeUpdate();
-            ResultSet rs = preparedStatement.executeQuery();
-
         } catch (SQLException e) {
         }
     }
