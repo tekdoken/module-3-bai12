@@ -31,7 +31,7 @@ public class productController {
     CategoryService categoryService;
 
     @GetMapping("/")
-    private String showProduct(HttpServletRequest request, HttpServletResponse response, Model model) throws ServletException, IOException, SQLException {
+    private String showProduct(HttpServletRequest request, Model model) throws ServletException, IOException, SQLException {
         List<Product> products;
         String name = request.getParameter("name");
         if (name == null) {
