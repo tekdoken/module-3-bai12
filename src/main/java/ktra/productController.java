@@ -89,9 +89,15 @@ public class productController {
         return "redirect:/";
     }
 
+//    @PostMapping("/create")
+//    private String create(@RequestParam String description, String color, String name, int categoryId, int quantity, int price) throws SQLException, IOException {
+//        productService.add(new Product(name, price, quantity, color, description, categoryId));
+//        return "redirect:/";
+//    }
+
     @PostMapping("/create")
-    private String create(@RequestParam String description, String color, String name, int categoryId, int quantity, int price) throws SQLException, IOException {
-        productService.add(new Product(name, price, quantity, color, description, categoryId));
+    private String create(Product product) throws SQLException, IOException {
+        productService.add(product);
         return "redirect:/";
     }
 }
