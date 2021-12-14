@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(name = "NewProductServlet", value = "")
+@WebServlet(name = "NewProductServlet", value = "/product")
 public class NewProductServlet extends HttpServlet {
     ProductService productService = new ProductServiceImpl();
     CategoryService categoryService = (CategoryService) new CategoryServiceImpl();
